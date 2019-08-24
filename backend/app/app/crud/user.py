@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 
 from app.core.security import get_password_hash, verify_password
 from app.db_models.user import User
-from app.models.user import UserCreate, UserUpdate
+from app.models.user import UserCreate# , UserUpdate
 
 
 def get(db_session: Session, *, user_id: int) -> Optional[User]:
@@ -41,7 +41,7 @@ def create(db_session: Session, *, user_in: UserCreate) -> User:
     user = User(
         email=user_in.email,
         hashed_password=get_password_hash(user_in.password),
-        full_name=user_in.full_name,
+        # full_name=user_in.full_name,
         is_superuser=user_in.is_superuser,
     )
     db_session.add(user)
