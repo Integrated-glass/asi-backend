@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, Enum, Binary, Integer, ForeignKey, String
+from sqlalchemy import  Column, Enum, Binary, Integer, ForeignKey, String
 from sqlalchemy.orm import relationship
 import enum
 
@@ -6,8 +6,8 @@ from app.db.base_class import Base
 
 
 class DocTypeEnum(enum.Enum):
-    entrepreneur_passport = enum.auto()
-    startup_business_plan = enum.auto()
+    entrepreneur_passport = "entrepreneur_passport"
+    startup_business_plan = "startup_business_plan"
 
 
 class Document(Base):

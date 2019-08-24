@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, Integer,ForeignKey, String
+from sqlalchemy import  Column, Integer,ForeignKey, String
 from sqlalchemy.orm import relationship
 
 from app.db.base_class import Base
@@ -15,3 +15,4 @@ class Entrepreneur(Base):
     user = relationship("User", back_populates="entrepreneur")
 
     startups = relationship("Startup", uselist=True, back_populates="owner")
+
