@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from app.models.entrepreneur import EntrepreneurOrm
+from app.models import EntrepreneurOrm
 from app.db_models.entrepreneur import Entrepreneur as EntrepreneurDB
 import app.crud.entrepreneur
 

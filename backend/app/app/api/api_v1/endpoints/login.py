@@ -11,8 +11,8 @@ from app.core.jwt import create_access_token
 from app.core.security import get_password_hash
 from app.db_models.user import User as DBUser, Roles
 # from app.models.msg import Msg
-from app.models.token import Token
-from app.models.user import User, UserCreate
+from app.models import Token
+from app.models import User, UserCreate
 
 router = APIRouter()
 
