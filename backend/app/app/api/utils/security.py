@@ -15,6 +15,22 @@ from app.models.token import TokenPayload
 reusable_oauth2 = OAuth2PasswordBearer(tokenUrl="/api/login/access-token")
 
 
+def get_current_user(
+        db: Session = Depends(get_db), token: str = Security(reusable_oauth2)
+):
+    try:
+        payload = jwt.decode(token, config.SECRET_KEY, algorithms=[ALGORITHM])
+        token_data = TokenPayload(**payload)
+    except PyJWTError:
+        raise HTTPException(
+            status_code=HTTP_403_FORBIDDEN, detail="Could not validate credentials"
+        )
+    user = crud.user.get(db, user_id=token_data.user_id)
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return user
+
+
 def get_current_investor(
         db: Session = Depends(get_db), token: str = Security(reusable_oauth2)
 ):
@@ -29,10 +45,10 @@ def get_current_investor(
         raise HTTPException(
             status_code=HTTP_403_FORBIDDEN, detail="You are not an investor"
         )
-    user = crud.investor.get(db, user_id=token_data.user_id)
-    if not user:
+    investor = crud.investor.get(db, user_id=token_data.user_id)
+    if not investor:
         raise HTTPException(status_code=404, detail="User not found")
-    return user
+    return investor
 
 
 def get_current_entrepreneur(
@@ -49,8 +65,7 @@ def get_current_entrepreneur(
         raise HTTPException(
             status_code=HTTP_403_FORBIDDEN, detail="You are not an entrepreneur"
         )
-    user = crud.entrepreneur.get(db, user_id=token_data.user_id)
-    if not user:
+    entrepreneur = crud.entrepreneur.get(db, user_id=token_data.user_id)
+    if not entrepreneur:
         raise HTTPException(status_code=404, detail="User not found")
-    return user
-
+    return entrepreneur
