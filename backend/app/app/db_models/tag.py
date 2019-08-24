@@ -11,5 +11,5 @@ class Tag(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
 
-    startups = relationship("Startup", secondary=startup_tag, back_populates="tags")
-    investors = relationship("Investor", secondary=investor_tag, back_populates="tags")
+    startups = relationship("Startup", secondary=startup_tag, back_populates="startup_tags")
+    investors = relationship("Investor", secondary=investor_tag, back_populates="investor_tags")

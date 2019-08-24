@@ -14,8 +14,8 @@ class Investor(Base):
     max_investment = Column(DECIMAL)
 
     user_id = Column(Integer, ForeignKey('user.id'))
-    user = relationship("User", back_populates="entrepreneur")
+    user = relationship("User", back_populates="investor")
 
     history = relationship("InvestorInvestmentHistory", back_populates="investor")
 
-    tags = relationship("Tag", secondary=investor_tag, backref="investors")
+    investor_tags = relationship("Tag", secondary=investor_tag, backref="investors")

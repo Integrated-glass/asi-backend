@@ -18,4 +18,4 @@ class Startup(Base):
     owner_id = Column(Integer, ForeignKey("entrepreneur.id"))
     owner = relationship("Entrepreneur", back_populates="startups")
 
-    tags = relationship("Tag", secondary=startup_tag, backref='startups')
+    startup_tags = relationship("Tag", secondary=startup_tag, backref='startups')
