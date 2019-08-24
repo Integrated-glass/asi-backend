@@ -3,7 +3,7 @@ from typing import Optional
 from sqlalchemy.orm import Session
 
 from app.db_models.entrepreneur import Entrepreneur
-from app.models.entrepreneur import EntrepreneurCreate
+from app.models import EntrepreneurCreate
 
 
 def get(db_session: Session, *, user_id: int) -> Optional[Entrepreneur]:

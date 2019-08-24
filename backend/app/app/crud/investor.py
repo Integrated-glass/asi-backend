@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
 from app.db_models.investor import Investor
-from app.models.investor import InvestorCreate
+from app.models import InvestorCreate
 
 
 def get(db: Session, investor_id: int):

@@ -6,9 +6,9 @@ from starlette.status import HTTP_428_PRECONDITION_REQUIRED
 
 from app.api.utils.security import get_current_user
 from app.api.utils.db import get_db
-from app.models.user import Roles
-from app.models.entrepreneur import EntrepreneurCreate
-from app.models.investor import InvestorCreate
+from app.models import Roles
+from app.models import EntrepreneurCreate
+from app.models import InvestorCreate
 
 import app.crud
 

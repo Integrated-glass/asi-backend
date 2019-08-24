@@ -10,7 +10,7 @@ from app.api.utils.db import get_db
 from app.core import config
 from app.core.jwt import ALGORITHM
 from app.db_models.user import User
-from app.models.token import TokenPayload
+from app.models import TokenPayload
 
 reusable_oauth2 = OAuth2PasswordBearer(tokenUrl="/login/access-token")
 
