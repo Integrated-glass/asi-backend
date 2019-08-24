@@ -11,5 +11,5 @@ class Passport(Base):
     issued_code = Column(String(6))
     issued_date = Column(Date)
 
-    user_id = Column(Integer, ForeignKey("user.id"))
+    user_id = Column(Integer, ForeignKey("User.id"))
     user = relationship("User", back_populates="passport")

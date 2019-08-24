@@ -143,6 +143,10 @@ class InvestorCreate(InvestorBase):
     user_id: int
 
 
+class InvestorForInvestorsListForIvestorsSearchByFiltersProxyFactoryAwareInvestorsSingletonFactory(InvestorBase):
+    tags: List[TagOrm]
+
+
 # Shared properties
 
 
