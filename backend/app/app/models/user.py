@@ -4,6 +4,8 @@ from pydantic import BaseModel
 import enum
 
 from .base import Base
+from .entrepreneur import EntrepreneurOrm
+from .investor import InvestorOrm
 
 
 class Roles(str, enum.Enum):
@@ -14,7 +16,6 @@ class Roles(str, enum.Enum):
 # Shared properties
 class UserBase(Base):
     email: Optional[str] = None
-    is_superuser: Optional[bool] = False
     role: Roles
 
 
@@ -36,3 +37,8 @@ class User(UserBaseInDB):
 # Additional properties stored in DB
 class UserInDB(UserBaseInDB):
     hashed_password: str
+
+
+class UserOrm(UserBase):
+    entrepreneur: Optional[EntrepreneurOrm]
+    investor: Optional[InvestorOrm]
