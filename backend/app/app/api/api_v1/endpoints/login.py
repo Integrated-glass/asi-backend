@@ -11,7 +11,7 @@ from app.core import config
 from app.core.jwt import create_access_token
 from app.core.security import get_password_hash
 from app.db_models.user import User as DBUser
-from app.models.msg import Msg
+#from app.models.msg import Msg
 from app.models.token import Token
 from app.models.user import User
 

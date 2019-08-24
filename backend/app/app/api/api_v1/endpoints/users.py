@@ -10,7 +10,7 @@ from app.api.utils.db import get_db
 from app.api.utils.security import get_current_active_superuser, get_current_active_user
 from app.core import config
 from app.db_models.user import User as DBUser
-from app.models.user import User, UserCreate, UserInDB, UserUpdate
+#from app.models.user import User, UserCreate, UserInDB, UserUpdate
 
 router = APIRouter()
 
