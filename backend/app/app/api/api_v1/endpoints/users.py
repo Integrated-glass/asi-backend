@@ -1,6 +1,17 @@
-from typing import List
+from typing import Optional
 
+from sqlalchemy.orm import Session
 from fastapi import APIRouter, Body, Depends, HTTPException
+from starlette.status import HTTP_428_PRECONDITION_REQUIRED
+
+from app.api.utils.security import get_current_user
+from app.api.utils.db import get_db
+from app.models.user import Roles
+from app.models.entrepreneur import EntrepreneurCreate
+from app.models.investor import InvestorCreate
+
+import app.crud
+
 # from fastapi.encoders import jsonable_encoder
 # from pydantic.types import EmailStr
 # from sqlalchemy.orm import Session
@@ -10,9 +21,29 @@ from fastapi import APIRouter, Body, Depends, HTTPException
 # from app.api.utils.security import get_current_active_superuser, get_current_active_user
 # from app.core import config
 # from app.db_models.user import User as DBUser
-#from app.models.user import User, UserCreate, UserInDB, UserUpdate
+# from app.models.user import User, UserCreate, UserInDB, UserUpdate
 
 router = APIRouter()
+
+
+@router.put("/registration_finish")
+def registration_finish(
+        *,
+        db: Session = Depends(get_db),
+        current_user=Depends(get_current_user),
+        role: Roles = Body(...),
+        entrepreneur : Optional[EntrepreneurCreate],
+        investor: Optional[InvestorCreate]
+):
+    if current_user.role is not None:
+        raise HTTPException(
+            status_code=HTTP_428_PRECONDITION_REQUIRED, detail="You have finished the registration"
+        )
+    elif current_user.role == Roles.investor:
+        app.crud.investor.create(db, investor)
+    elif current_user.role == Roles.entrepreneur:
+        app.crud.entrepreneur.create(db, entrepreneur)
+
 #
 #
 # @router.get("/", response_model=List[User])

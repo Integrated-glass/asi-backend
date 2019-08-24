@@ -3,7 +3,7 @@ from fastapi import Depends, HTTPException, Security
 from fastapi.security import OAuth2PasswordBearer
 from jwt import PyJWTError
 from sqlalchemy.orm import Session
-from starlette.status import HTTP_403_FORBIDDEN
+from starlette.status import HTTP_403_FORBIDDEN, HTTP_401_UNAUTHORIZED
 
 from app import crud
 from app.api.utils.db import get_db
@@ -12,7 +12,7 @@ from app.core.jwt import ALGORITHM
 from app.db_models.user import User
 from app.models.token import TokenPayload
 
-reusable_oauth2 = OAuth2PasswordBearer(tokenUrl="/api/login/access-token")
+reusable_oauth2 = OAuth2PasswordBearer(tokenUrl="/login/access-token")
 
 
 def get_current_user(
@@ -41,6 +41,10 @@ def get_current_investor(
         raise HTTPException(
             status_code=HTTP_403_FORBIDDEN, detail="Could not validate credentials"
         )
+    if token_data.role is None:
+        raise HTTPException(
+            status_code=HTTP_401_UNAUTHORIZED, detail="Registration is not finished"
+        )
     if token_data.role != "investor":
         raise HTTPException(
             status_code=HTTP_403_FORBIDDEN, detail="You are not an investor"
@@ -60,6 +64,10 @@ def get_current_entrepreneur(
     except PyJWTError:
         raise HTTPException(
             status_code=HTTP_403_FORBIDDEN, detail="Could not validate credentials"
+        )
+    if token_data.role is None:
+        raise HTTPException(
+            status_code=HTTP_401_UNAUTHORIZED, detail="Registration is not finished"
         )
     if token_data.role != 'entrepreneur':
         raise HTTPException(

@@ -32,15 +32,9 @@ def authenticate(db_session: Session, *, email: str, password_hash: str) -> Opti
 def create(db_session: Session, *, user_in: UserCreate) -> User:
     user = User(
         email=user_in.email,
-        hashed_password=get_password_hash(user_in.password),
+        hashed_password=user_in.hashed_password,
         role=user_in.role
-        # full_name=user_in.full_name,
-        # is_superuser=user_in.is_superuser,
     )
-    if user_in.role == Roles.entrepreneur:
-        pass
-    elif user_in.role == Roles.investor:
-        pass
 
     db_session.add(user)
     db_session.commit()
