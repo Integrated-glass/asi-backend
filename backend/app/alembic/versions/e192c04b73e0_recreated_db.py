@@ -1,8 +1,8 @@
-"""entities 3
+"""recreated db
 
-Revision ID: 7af7bc50d3ea
-Revises: f41874662efd
-Create Date: 2019-08-24 13:51:40.292189
+Revision ID: e192c04b73e0
+Revises: 
+Create Date: 2019-08-24 17:33:19.284351
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '7af7bc50d3ea'
-down_revision = 'f41874662efd'
+revision = 'e192c04b73e0'
+down_revision = None
 branch_labels = None
 depends_on = None
 
@@ -32,8 +32,8 @@ def upgrade():
     sa.Column('start_date', sa.Date(), nullable=True),
     sa.Column('end_date', sa.Date(), nullable=True),
     sa.Column('link', sa.String(), nullable=True),
-    sa.Column('min_money', sa.Integer(), nullable=True),
-    sa.Column('max_money', sa.Integer(), nullable=True),
+    sa.Column('min_money', sa.DECIMAL(), nullable=True),
+    sa.Column('max_money', sa.DECIMAL(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_investment_id'), 'investment', ['id'], unique=False)
@@ -41,8 +41,8 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(), nullable=True),
     sa.Column('link', sa.String(), nullable=True),
-    sa.Column('min_investment', sa.Integer(), nullable=True),
-    sa.Column('max_investment', sa.Integer(), nullable=True),
+    sa.Column('min_investment', sa.DECIMAL(), nullable=True),
+    sa.Column('max_investment', sa.DECIMAL(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_investor_id'), 'investor', ['id'], unique=False)
@@ -56,8 +56,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('email', sa.String(), nullable=True),
     sa.Column('hashed_password', sa.String(), nullable=True),
-    sa.Column('is_superuser', sa.Boolean(), nullable=True),
-    sa.Column('role', sa.String(), nullable=False),
+    sa.Column('role', sa.Enum('entrepreneur', 'investor', name='roles'), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_user_email'), 'user', ['email'], unique=True)
