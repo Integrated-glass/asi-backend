@@ -10,8 +10,8 @@ class Investor(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
     link = Column(String)
-    min_investment = Column(Integer)
-    max_investment = Column(Integer)
+    min_investment = Column(DECIMAL)
+    max_investment = Column(DECIMAL)
 
     history = relationship("InvestorInvestmentHistory", back_populates="investor")
 

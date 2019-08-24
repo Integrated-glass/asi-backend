@@ -11,5 +11,5 @@ class Investment(Base):
     start_date = Column(Date)
     end_date = Column(Date)
     link = Column(String)
-    min_money = Column(Integer)
-    max_money = Column(Integer)
+    min_money = Column(DECIMAL)
+    max_money = Column(DECIMAL)
