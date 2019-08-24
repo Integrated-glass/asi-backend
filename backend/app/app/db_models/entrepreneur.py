@@ -14,4 +14,4 @@ class Entrepreneur(Base):
     user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship("User", back_populates="entrepreneur")
 
-    startups = relationship("Startup", userlist=True, back_populates="owner")
+    startups = relationship("Startup", uselist=True, back_populates="owner")

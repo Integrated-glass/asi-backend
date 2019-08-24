@@ -1,13 +1,13 @@
 from sqlalchemy import Boolean, Column, Enum, Binary, Integer, ForeignKey, String
 from sqlalchemy.orm import relationship
-from enum import Enum, auto
+import enum
 
 from app.db.base_class import Base
 
 
-class DocTypeEnum(Enum):
-    entrepreneur_passport = auto()
-    startup_business_plan = auto()
+class DocTypeEnum(enum.Enum):
+    entrepreneur_passport = enum.auto()
+    startup_business_plan = enum.auto()
 
 
 class Document(Base):
