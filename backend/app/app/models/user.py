@@ -1,16 +1,21 @@
 from typing import Optional
 
 from pydantic import BaseModel
+import enum
+
+from .base import Base
+
+
+class Roles(str, enum.Enum):
+    entrepreneur = "entrepreneur"
+    investor = "investor"
 
 
 # Shared properties
-class UserBase(BaseModel):
+class UserBase(Base):
     email: Optional[str] = None
     is_superuser: Optional[bool] = False
-    role: str
-
-    class Config:
-        orm_mode = True
+    role: Roles
 
 
 class UserBaseInDB(UserBase):
