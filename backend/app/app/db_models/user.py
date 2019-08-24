@@ -11,5 +11,5 @@ class User(Base):
     is_superuser = Column(Boolean(), default=False)
     role = Column(String, nullable=False)
 
-    passport = relationship("Passport", back_poplates="user", uselist=False)
+    passport = relationship("Passport", back_populates="user", uselist=False)
     entrepreneur = relationship("Entrepreneur", back_populates="user",  uselist=False)
