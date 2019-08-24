@@ -5,7 +5,7 @@ from app.db.base_class import Base
 import enum
 
 
-class Roles(str, enum.Enum):
+class Roles(enum.Enum):
     entrepreneur = "entrepreneur"
     investor = "investor"
 
